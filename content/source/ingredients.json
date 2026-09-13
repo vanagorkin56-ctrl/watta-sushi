@@ -1,0 +1,570 @@
+[
+  {
+    "id": 1,
+    "name_ru": "Огурец",
+    "name_ua": "Огірок",
+    "name_en": "Cucumber",
+    "name_nl": "Komkommer",
+    "imageUrl": "/uploads/ingredient-1781216260220-9aa8e1cc5ec416f1.jpg"
+  },
+  {
+    "id": 2,
+    "name_ru": "Рис",
+    "name_ua": "Рис",
+    "name_en": "Rice",
+    "name_nl": "Rijst",
+    "imageUrl": "/uploads/ingredient-1781217407639-eed9c4fb62c45bb5.jpg"
+  },
+  {
+    "id": 3,
+    "name_ru": "Лосось",
+    "name_ua": "Лосось",
+    "name_en": "Salmon",
+    "name_nl": "Zalm",
+    "imageUrl": "/uploads/ingredient-1781217438873-8c5dc45f2b295b8e.jpg"
+  },
+  {
+    "id": 4,
+    "name_ru": "Нори",
+    "name_ua": "Норі",
+    "name_en": "Nori",
+    "name_nl": "Nori",
+    "imageUrl": "/uploads/ingredient-1781217474297-b050c1505fade715.jpg"
+  },
+  {
+    "id": 5,
+    "name_ru": "Жареный лосось с майонезом",
+    "name_ua": "Смажений лосось із майонезом",
+    "name_en": "Fried salmon with mayonnaise",
+    "name_nl": "Gebakken zalm met mayonaise",
+    "imageUrl": "/uploads/ingredient-1781217998180-3ae62f1428ca98f0.jpg"
+  },
+  {
+    "id": 6,
+    "name_ru": "Крем-сыр",
+    "name_ua": "Крем-сир",
+    "name_en": "Cream cheese",
+    "name_nl": "Roomkaas",
+    "imageUrl": "/uploads/ingredient-1781218041479-fb35c3a8b9688426.jpg"
+  },
+  {
+    "id": 7,
+    "name_ru": "Авокадо",
+    "name_ua": "Авокадо",
+    "name_en": "Avocado",
+    "name_nl": "Avocado",
+    "imageUrl": "/uploads/ingredient-1781217678574-db51d17640ea2eb4.jpg"
+  },
+  {
+    "id": 8,
+    "name_ru": "Пармезан",
+    "name_ua": "Пармезан",
+    "name_en": "Parmesan",
+    "name_nl": "Parmezaan",
+    "imageUrl": "/uploads/ingredient-1781217687549-f013a3d231a04510.jpg"
+  },
+  {
+    "id": 9,
+    "name_ru": "Тунец",
+    "name_ua": "Тунець",
+    "name_en": "Tuna",
+    "name_nl": "Tonijn",
+    "imageUrl": "/uploads/ingredient-1781217715868-8db07e53503c3525.jpg"
+  },
+  {
+    "id": 10,
+    "name_ru": "Шрирача майо",
+    "name_ua": "Шрірача майо",
+    "name_en": "Sriracha mayo",
+    "name_nl": "Sriracha mayo",
+    "imageUrl": "/uploads/ingredient-1781217742326-d2d5851ffbc6293f.jpg"
+  },
+  {
+    "id": 11,
+    "name_ru": "Кунжут",
+    "name_ua": "Кунжут",
+    "name_en": "Sesame",
+    "name_nl": "Sesam",
+    "imageUrl": "/uploads/ingredient-1781217796708-031b970ba199af9f.jpg"
+  },
+  {
+    "id": 12,
+    "name_ru": "Креветка",
+    "name_ua": "Креветка",
+    "name_en": "Shrimp",
+    "name_nl": "Garnaal",
+    "imageUrl": "/uploads/ingredient-1781217850267-86a3089a5c5ab9ca.jpg"
+  },
+  {
+    "id": 13,
+    "name_ru": "Ореховый соус",
+    "name_ua": "Горіховий соус",
+    "name_en": "Nut sauce",
+    "name_nl": "Notensaus",
+    "imageUrl": "/uploads/ingredient-1781217900681-6281709b80481280.jpg"
+  },
+  {
+    "id": 14,
+    "name_ru": "Угорь",
+    "name_ua": "Вугор",
+    "name_en": "Eel",
+    "name_nl": "Paling",
+    "imageUrl": "/uploads/ingredient-1781218067670-649b67cfe48a9d10.jpg"
+  },
+  {
+    "id": 15,
+    "name_ru": "Унаги",
+    "name_ua": "Унагі",
+    "name_en": "Unagi",
+    "name_nl": "Unagi",
+    "imageUrl": "/uploads/ingredient-1781218113680-b10e7a1dd7a5ac18.jpg"
+  },
+  {
+    "id": 16,
+    "name_ru": "Манго",
+    "name_ua": "Манго",
+    "name_en": "Mango",
+    "name_nl": "Mango",
+    "imageUrl": "/uploads/ingredient-1781218146310-cf9ef78db8b814db.jpg"
+  },
+  {
+    "id": 17,
+    "name_ru": "Соус терияки",
+    "name_ua": "Теріяки соус",
+    "name_en": "Teriyaki sauce",
+    "name_nl": "Teriyakisaus",
+    "imageUrl": "/uploads/ingredient-1781218189792-e84c2f0fbeb438ab.jpg"
+  },
+  {
+    "id": 18,
+    "name_ru": "Чиа",
+    "name_ua": "Чіа",
+    "name_en": "Chia",
+    "name_nl": "Chia",
+    "imageUrl": "/uploads/ingredient-1781218229404-8c8a6cda2c1021e0.jpg"
+  },
+  {
+    "id": 19,
+    "name_ru": "Масаго",
+    "name_ua": "Масаго",
+    "name_en": "Masago",
+    "name_nl": "Masago",
+    "imageUrl": "/uploads/ingredient-1781218267757-f4ea775362f184f5.jpg"
+  },
+  {
+    "id": 20,
+    "name_ru": "Гребешок",
+    "name_ua": "Гребінець",
+    "name_en": "Scallop",
+    "name_nl": "Sint-jakobsschelp",
+    "imageUrl": "/uploads/ingredient-1781218306577-be0d85470b2d2975.jpg"
+  },
+  {
+    "id": 21,
+    "name_ru": "Жареный лосось",
+    "name_ua": "Смажений лосось",
+    "name_en": "Fried salmon",
+    "name_nl": "Gebakken zalm",
+    "imageUrl": "/uploads/ingredient-1781218337778-ef7508d8ddfe0943.jpg"
+  },
+  {
+    "id": 22,
+    "name_ru": "Шнитт-лук",
+    "name_ua": "Цибуля шніт",
+    "name_en": "Chives",
+    "name_nl": "Bieslook",
+    "imageUrl": "/uploads/ingredient-1781218505383-6a4173e1099102ad.jpg"
+  },
+  {
+    "id": 23,
+    "name_ru": "Икра",
+    "name_ua": "Ікра",
+    "name_en": "Caviar",
+    "name_nl": "Kaviaar",
+    "imageUrl": "/uploads/ingredient-1781218513899-04b4f203e7e4fbd3.jpg"
+  },
+  {
+    "id": 24,
+    "name_ru": "Тогараси",
+    "name_ua": "Тогараші",
+    "name_en": "Togarashi",
+    "name_nl": "Togarashi",
+    "imageUrl": "/uploads/ingredient-1781218522462-25ac94a90931625a.jpg"
+  },
+  {
+    "id": 25,
+    "name_ru": "Чёрный рис",
+    "name_ua": "Чорний рис",
+    "name_en": "Black rice",
+    "name_nl": "Zwarte rijst",
+    "imageUrl": "/uploads/ingredient-1781218792998-1a87e21d8e1490dd.jpg"
+  },
+  {
+    "id": 26,
+    "name_ru": "Зелёный лук",
+    "name_ua": "Зелена цибуля",
+    "name_en": "Green onion",
+    "name_nl": "Lente-ui",
+    "imageUrl": "/uploads/ingredient-1781218807958-07c7ea83ed37db07.jpg"
+  },
+  {
+    "id": 27,
+    "name_ru": "Соус тогараси",
+    "name_ua": "Тогараші соус",
+    "name_en": "Togarashi sauce",
+    "name_nl": "Togarashisaus",
+    "imageUrl": "/uploads/ingredient-1781218841355-0b0f69b59dedf81a.jpg"
+  },
+  {
+    "id": 28,
+    "name_ru": "Эби",
+    "name_ua": "Ебі",
+    "name_en": "Ebi",
+    "name_nl": "Ebi",
+    "imageUrl": "/uploads/ingredient-1781219349550-c53e1d78f24b899f.jpg"
+  },
+  {
+    "id": 29,
+    "name_ru": "Жареный лук",
+    "name_ua": "Смажена цибуля",
+    "name_en": "Fried onion",
+    "name_nl": "Gebakken ui",
+    "imageUrl": "/uploads/ingredient-1781218858500-56b55f136fedfd2d.jpg"
+  },
+  {
+    "id": 30,
+    "name_ru": "Омлет",
+    "name_ua": "Омлет",
+    "name_en": "Omelet",
+    "name_nl": "Omelet",
+    "imageUrl": "/uploads/ingredient-1781218913091-82caff4ca7a232c9.jpg"
+  },
+  {
+    "id": 31,
+    "name_ru": "Васаби майонез",
+    "name_ua": "Васабі майонез",
+    "name_en": "Wasabi mayonnaise",
+    "name_nl": "Wasabi-mayonaise",
+    "imageUrl": "/uploads/ingredient-1781218925193-f816b68f2a066bad.jpg"
+  },
+  {
+    "id": 32,
+    "name_ru": "Крабовый микс",
+    "name_ua": "Крабовий мікс",
+    "name_en": "Crab mix",
+    "name_nl": "Krabmix",
+    "imageUrl": "/uploads/ingredient-1781218832126-42446d2eca4b5388.jpg"
+  },
+  {
+    "id": 33,
+    "name_ru": "Крабовая палочка",
+    "name_ua": "Крабова паличка",
+    "name_en": "Crab stick",
+    "name_nl": "Krabstick",
+    "imageUrl": "/uploads/ingredient-1781218937991-9dfb4acac90fcc91.jpg"
+  },
+  {
+    "id": 34,
+    "name_ru": "Руккола",
+    "name_ua": "Рукола",
+    "name_en": "Arugula",
+    "name_nl": "Rucola",
+    "imageUrl": "/uploads/ingredient-1781218966818-fc609aac499ae8be.jpg"
+  },
+  {
+    "id": 35,
+    "name_ru": "Карпаччо из говядины",
+    "name_ua": "Карпачо з яловичини",
+    "name_en": "Beef carpaccio",
+    "name_nl": "Rundercarpaccio",
+    "imageUrl": "/uploads/ingredient-1781219024588-72e01362dda617c9.jpg"
+  },
+  {
+    "id": 36,
+    "name_ru": "Грибы вешенки",
+    "name_ua": "Гриби вішанки",
+    "name_en": "Oyster mushrooms",
+    "name_nl": "Oesterzwammen",
+    "imageUrl": "/uploads/ingredient-1781219073132-6933e81425d682f7.jpg"
+  },
+  {
+    "id": 37,
+    "name_ru": "Батат",
+    "name_ua": "Батат",
+    "name_en": "Sweet potato",
+    "name_nl": "Zoete aardappel",
+    "imageUrl": "/uploads/ingredient-1781219163128-c860e2d943a27d4e.jpg"
+  },
+  {
+    "id": 38,
+    "name_ru": "Веганский сыр",
+    "name_ua": "Веганський сир",
+    "name_en": "Vegan cheese",
+    "name_nl": "Vegan kaas",
+    "imageUrl": "/uploads/ingredient-1781219176406-9fa390866bfbe464.jpg"
+  },
+  {
+    "id": 39,
+    "name_ru": "Битруд крамбл",
+    "name_ua": "Бітруд крамбл",
+    "name_en": "Beet crumble",
+    "name_nl": "Biet crumble",
+    "imageUrl": "/uploads/ingredient-1781219123384-7dff35b7b74c02dc.jpg"
+  },
+  {
+    "id": 41,
+    "name_ru": "Устричный соус",
+    "name_ua": "Устричний соус",
+    "name_en": "Oyster sauce",
+    "name_nl": "Oestersaus",
+    "imageUrl": "/uploads/ingredient-1781219214033-34377fdace09d95c.jpg"
+  },
+  {
+    "id": 42,
+    "name_ru": "Болгарский перец",
+    "name_ua": "Паприка",
+    "name_en": "Bell pepper",
+    "name_nl": "Paprika",
+    "imageUrl": "/uploads/ingredient-1781219513328-025c8581fd0200e6.jpg"
+  },
+  {
+    "id": 44,
+    "name_ru": "Майонез",
+    "name_ua": "Майонез",
+    "name_en": "Mayonnaise",
+    "name_nl": "Mayonaise",
+    "imageUrl": "/uploads/ingredient-1781219440568-778cd4ae39f4075c.jpg"
+  },
+  {
+    "id": 45,
+    "name_ru": "Халапеньо",
+    "name_ua": "Халапеньйо",
+    "name_en": "Jalapeño",
+    "name_nl": "Jalapeño",
+    "imageUrl": "/uploads/ingredient-1781219370735-1bc2ebf81fbb86ad.jpg"
+  },
+  {
+    "id": 46,
+    "name_ru": "Тобико",
+    "name_ua": "Тобіко",
+    "name_en": "Tobiko",
+    "name_nl": "Tobiko",
+    "imageUrl": "/uploads/ingredient-1781219525563-65893b359f18e387.jpg"
+  },
+  {
+    "id": 47,
+    "name_ru": "Кимчи кунжут",
+    "name_ua": "Кімчі кунжут",
+    "name_en": "Kimchi sesame",
+    "name_nl": "Kimchi sesam",
+    "imageUrl": "/uploads/ingredient-1781219598614-07e8484db12cfd5d.jpg"
+  },
+  {
+    "id": 48,
+    "name_ru": "Спайси майонез",
+    "name_ua": "Спайсі майонез",
+    "name_en": "Spicy mayonnaise",
+    "name_nl": "Pittige mayonaise",
+    "imageUrl": "/uploads/ingredient-1781219642018-4ffc59453348da90.jpg"
+  },
+  {
+    "id": 49,
+    "name_ru": "Тунец",
+    "name_ua": "Тунець",
+    "name_en": "Tuna",
+    "name_nl": "Tonijn",
+    "imageUrl": "/uploads/ingredient-1781219684373-615d86d59ed71fc2.jpg"
+  },
+  {
+    "id": 50,
+    "name_ru": "Фунчоза",
+    "name_ua": "Фунчоза",
+    "name_en": "Glass noodles",
+    "name_nl": "Glasnoedels",
+    "imageUrl": "/uploads/ingredient-1781219853662-d235cb8615b352fd.jpg"
+  },
+  {
+    "id": 51,
+    "name_ru": "Филе сибаса",
+    "name_ua": "Філе сібаса",
+    "name_en": "Sea bass fillet",
+    "name_nl": "Zeebaarsfilet",
+    "imageUrl": "/uploads/ingredient-1781220153986-cebc2b04a97fb03c.jpg"
+  },
+  {
+    "id": 52,
+    "name_ru": "Сладкий чили",
+    "name_ua": "Солодкий чілі",
+    "name_en": "Sweet chili",
+    "name_nl": "Zoete chilisaus",
+    "imageUrl": "/uploads/ingredient-1781219866946-590cc79b61425dab.jpg"
+  },
+  {
+    "id": 53,
+    "name_ru": "Чука",
+    "name_ua": "Чука",
+    "name_en": "Chuka",
+    "name_nl": "Chuka",
+    "imageUrl": "/uploads/ingredient-1781219398134-db79739979160845.jpg"
+  },
+  {
+    "id": 54,
+    "name_ru": "Стружка тунца",
+    "name_ua": "Стружка тунця",
+    "name_en": "Tuna flakes",
+    "name_nl": "Tonijnvlokken",
+    "imageUrl": "/uploads/ingredient-1781220143005-ddf7f75144dc22f1.jpg"
+  },
+  {
+    "id": 55,
+    "name_ru": "Чёрный кунжут",
+    "name_ua": "Чорний кунжут",
+    "name_en": "Black sesame",
+    "name_nl": "Zwarte sesam",
+    "imageUrl": "/uploads/ingredient-1781220271510-0c43e66ded4a3270.jpg"
+  },
+  {
+    "id": 56,
+    "name_ru": "Медово-лимонный соус",
+    "name_ua": "Медово-лимонний соус",
+    "name_en": "Honey lemon sauce",
+    "name_nl": "Honing-citroensaus",
+    "imageUrl": "/uploads/ingredient-1781220291646-156301a6a924423f.jpg"
+  },
+  {
+    "id": 57,
+    "name_ru": "Нити чили",
+    "name_ua": "Нитки чілі",
+    "name_en": "Chili threads",
+    "name_nl": "Chilidraden",
+    "imageUrl": "/uploads/ingredient-1781220342404-9a9c2b96faad7df3.jpg"
+  },
+  {
+    "id": 58,
+    "name_ru": "Соус поке",
+    "name_ua": "Соус поке",
+    "name_en": "Poke sauce",
+    "name_nl": "Pokésaus",
+    "imageUrl": "/uploads/ingredient-1781220510982-5228f564377abb89.jpg"
+  },
+  {
+    "id": 59,
+    "name_ru": "Мидии",
+    "name_ua": "Мідії",
+    "name_en": "Mussels",
+    "name_nl": "Mosselen",
+    "imageUrl": "/uploads/ingredient-1781220626757-13654b1c4bdda137.jpg"
+  },
+  {
+    "id": 60,
+    "name_ru": "Варёное куриное филе",
+    "name_ua": "Відварене куряче філе",
+    "name_en": "Boiled chicken fillet",
+    "name_nl": "Gekookte kipfilet",
+    "imageUrl": "/uploads/ingredient-1781220711824-1855d6fbd5d295d6.jpg"
+  },
+  {
+    "id": 61,
+    "name_ru": "Салат айсберг",
+    "name_ua": "Салат айсберг",
+    "name_en": "Iceberg lettuce",
+    "name_nl": "Jsbergsla",
+    "imageUrl": "/uploads/ingredient-1781220734781-ca3463c6713e0d6e.jpg"
+  },
+  {
+    "id": 62,
+    "name_ru": "Панко",
+    "name_ua": "Панко",
+    "name_en": "Panko",
+    "name_nl": "Panko",
+    "imageUrl": "/uploads/ingredient-1781220767860-a203d898d21bf972.jpg"
+  },
+  {
+    "id": 63,
+    "name_ru": "Краб",
+    "name_ua": "Краб",
+    "name_en": "Crab",
+    "name_nl": "Krab",
+    "imageUrl": "/uploads/ingredient-1781220827176-2f243492055cede9.jpg"
+  },
+  {
+    "id": 64,
+    "name_ru": "Вяленые томаты",
+    "name_ua": "В’ялені томати",
+    "name_en": "Sun-dried tomatoes",
+    "name_nl": "Zongedroogde tomaten",
+    "imageUrl": "/uploads/ingredient-1781220796552-ca912c0e61160ab9.jpg"
+  },
+  {
+    "id": 65,
+    "name_ru": "Тартар лосось",
+    "name_ua": "Тартар лосось",
+    "name_en": "Salmon tartare",
+    "name_nl": "Zalmtartaar",
+    "imageUrl": "/uploads/ingredient-1781220933698-267903e16fc526dc.jpg"
+  },
+  {
+    "id": 66,
+    "name_ru": "Тартар креветка",
+    "name_ua": "Тартар креветка",
+    "name_en": "Shrimp tartare",
+    "name_nl": "Garnaaltartaar",
+    "imageUrl": "/uploads/ingredient-1781220899283-39ac61c08a79d488.jpg"
+  },
+  {
+    "id": 67,
+    "name_ru": "Тартар тунец",
+    "name_ua": "Тартар тунець",
+    "name_en": "Tuna tartare",
+    "name_nl": "Tonijntartaar",
+    "imageUrl": "/uploads/ingredient-1781220978021-0d93b3ed7e3212f4.jpg"
+  },
+  {
+    "id": 68,
+    "name_ru": "Тартар угорь",
+    "name_ua": "Тартар вугор",
+    "name_en": "Eel tartare",
+    "name_nl": "Palingtartaar",
+    "imageUrl": "/uploads/ingredient-1781221014418-71a504e097e3721b.jpg"
+  },
+  {
+    "id": 69,
+    "name_ru": "Тартар из гребешка",
+    "name_ua": "Тартар з гребінця",
+    "name_en": "Scallop tartare",
+    "name_nl": "Sint-jakobsschelptartaar",
+    "imageUrl": "/uploads/ingredient-1781221087899-150c11fb2c6377ee.jpg"
+  },
+  {
+    "id": 70,
+    "name_ru": "Кюпи",
+    "name_ua": "Кюпій",
+    "name_en": "Kewpie",
+    "name_nl": "Kewpie",
+    "imageUrl": "/uploads/ingredient-1781220863529-30d9dd5b42383bd4.jpg"
+  },
+  {
+    "id": 71,
+    "name_ru": "Соус с кокосовым молоком",
+    "name_ua": "Соус з кокосовим молоком",
+    "name_en": "Coconut milk sauce",
+    "name_nl": "Saus met kokosmelk",
+    "imageUrl": "/uploads/ingredient-1781221101262-24ecf53f843de162.jpg"
+  },
+  {
+    "id": 72,
+    "name_ru": "Кюпи майонез",
+    "name_ua": "Кюпій майонез",
+    "name_en": "Kewpie mayonnaise",
+    "name_nl": "Kewpie mayonaise",
+    "imageUrl": "/uploads/ingredient-1781221118656-6ebb2c6b283afea2.jpg"
+  },
+  {
+    "id": 73,
+    "name_ru": "Шиитаке",
+    "name_ua": "Шіїтаке",
+    "name_en": "Shiitake",
+    "name_nl": "Shiitake",
+    "imageUrl": "/uploads/ingredient-1781221160076-f4669cbc8d928ffb.jpg"
+  }
+]

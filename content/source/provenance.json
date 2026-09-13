@@ -1,0 +1,15 @@
+{
+  "source": "https://watta-sushi-web.onrender.com/menu",
+  "retrievedAt": "2026-09-13T11:10:51.922664+00:00",
+  "endpoints": {
+    "products": "https://watta-sushi-web.onrender.com/api/products",
+    "categories": "https://watta-sushi-web.onrender.com/api/products/categories",
+    "ingredients": "https://watta-sushi-web.onrender.com/api/ingredients"
+  },
+  "notes": [
+    "Raw public source data, not yet approved for the new shop.",
+    "Relative image URLs resolve against https://watta-sushi-web.onrender.com. Images have not been downloaded.",
+    "Currency, brand, business contacts and delivery terms await confirmation.",
+    "Preserve source prices; do not assume currency from numeric values alone."
+  ]
+}
