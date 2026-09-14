@@ -4,12 +4,13 @@ import {stripeClient} from '@/lib/stripe';
 import {fulfillSession} from '@/lib/fulfillment';
 import {processEmails} from '@/lib/email';
 import {db} from '@/lib/db';
+import {readLimitedText,RequestBodyTooLargeError} from '@/lib/security';
 export const runtime='nodejs';
 export async function POST(request:Request){
  const secret=process.env.STRIPE_WEBHOOK_SECRET;
  if(!secret)return NextResponse.json({error:'Not configured'},{status:503});
  const signature=request.headers.get('stripe-signature');if(!signature)return NextResponse.json({error:'Missing signature'},{status:400});
- let event;try{event=stripeClient().webhooks.constructEvent(await request.text(),signature,secret);}catch{return NextResponse.json({error:'Invalid signature'},{status:400});}
+ let event;try{event=stripeClient().webhooks.constructEvent(await readLimitedText(request,1024*1024),signature,secret);}catch(e){return NextResponse.json({error:e instanceof RequestBodyTooLargeError?'Payload too large':'Invalid signature'},{status:e instanceof RequestBodyTooLargeError?413:400});}
  try{
   if(event.type==='checkout.session.completed'||event.type==='checkout.session.async_payment_succeeded'){
    fulfillSession(event.data.object,event.id);after(async()=>{await processEmails();});

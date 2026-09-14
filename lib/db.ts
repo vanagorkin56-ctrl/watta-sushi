@@ -1,13 +1,14 @@
 import { DatabaseSync } from 'node:sqlite';
-import { mkdirSync } from 'node:fs';
+import { chmodSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import type { CheckoutInput, PricedOrder } from './order';
 let database: DatabaseSync | undefined;
 export function db() {
  if(database) return database;
- const path=resolve(/* turbopackIgnore: true */ process.env.DATABASE_PATH||'data/watta.sqlite'); mkdirSync(dirname(path),{recursive:true});
+ const path=resolve(/* turbopackIgnore: true */ process.env.DATABASE_PATH||'data/watta.sqlite'); mkdirSync(dirname(path),{recursive:true,mode:0o700});
  database=new DatabaseSync(path);
+ try{chmodSync(path,0o600);}catch{}
  database.exec(`PRAGMA journal_mode=WAL; PRAGMA busy_timeout=5000;
  CREATE TABLE IF NOT EXISTS orders (id TEXT PRIMARY KEY, request_id TEXT NOT NULL UNIQUE, request_hash TEXT NOT NULL, locale TEXT NOT NULL, customer TEXT NOT NULL, pricing TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'pending', session_id TEXT UNIQUE, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, paid_at TEXT);
  CREATE TABLE IF NOT EXISTS stripe_events (id TEXT PRIMARY KEY, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);

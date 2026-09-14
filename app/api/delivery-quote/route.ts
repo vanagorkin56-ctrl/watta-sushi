@@ -3,12 +3,17 @@ import {NextResponse} from 'next/server';
 import {addressSchema,deliveryQuote,addressHash} from '@/lib/delivery';
 import {appUrl} from '@/lib/stripe';
 import {OrderError} from '@/lib/order';
+import {checkRateLimit,isJsonRequest,readLimitedText,RequestBodyTooLargeError} from '@/lib/security';
+export const runtime='nodejs';
 export async function POST(request:Request){
  try{
   if(request.headers.get('origin')!==appUrl())return NextResponse.json({error:'invalidOrigin'},{status:403});
-  const raw=await request.text();if(raw.length>2000)return NextResponse.json({error:'invalidArea'},{status:400});
+  const limit=checkRateLimit(request,'delivery-quote',{limit:10,globalLimit:120,windowMs:60000});
+  if(!limit.allowed)return NextResponse.json({error:'rateLimited'},{status:429,headers:{'Retry-After':String(limit.retryAfter),'Cache-Control':'no-store'}});
+  if(!isJsonRequest(request))return NextResponse.json({error:'invalidArea'},{status:415});
+  const raw=await readLimitedText(request,2000);
   const parsed=addressSchema.safeParse(JSON.parse(raw));if(!parsed.success)return NextResponse.json({error:'invalidArea'},{status:400});
   const quote=await deliveryQuote(parsed.data);const saved=createDeliveryQuote(addressHash(parsed.data),quote.distanceMeters);
-  return NextResponse.json({...quote,quoteId:saved.id,expiresAt:saved.expires});
- }catch(e){return NextResponse.json({error:e instanceof OrderError?e.code:'deliveryUnavailable'},{status:400});}
+  return NextResponse.json({...quote,quoteId:saved.id,expiresAt:saved.expires},{headers:{'Cache-Control':'no-store'}});
+ }catch(e){if(e instanceof RequestBodyTooLargeError)return NextResponse.json({error:'invalidArea'},{status:413});return NextResponse.json({error:e instanceof OrderError?e.code:'deliveryUnavailable'},{status:400});}
 }

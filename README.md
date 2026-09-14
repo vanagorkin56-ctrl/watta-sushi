@@ -137,5 +137,6 @@ Before public launch, verify real payment/routing/email integrations and busines
 - Unit/integration tests in `tests/orders.test.ts`: canonical prices, roll minimum, input tampering, cents rounding, city validation, request deduplication, paid/unpaid fulfillment, duplicate webhooks, quote binding, routing adapter and Stripe signatures.
 - `scripts/browser-check.mjs`: desktop/mobile browser smoke test using a local Chrome executable; checks three languages, adding two rolls, basket persistence, pickup, missing configuration, search and overflow. Update the executable path on other machines.
 - `npm run screenshots`: reproducibly captures the page and category gallery under `screenshots/` while the development server is running.
+- `SECURITY.md`: implemented safeguards, the latest audit record and deployment requirements.
 
 Reference documentation: [Stripe fulfillment](https://docs.stripe.com/checkout/fulfillment), [Google Routes](https://developers.google.com/maps/documentation/routes/compute_route_directions). Next.js documentation for the installed version is bundled in `node_modules/next/dist/docs`.
