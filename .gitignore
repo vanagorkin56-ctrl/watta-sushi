@@ -6,6 +6,7 @@ data/
 *.tsbuildinfo
 playwright-report/
 test-results/
+.playwright-cli/
 artifacts/
 .agents/
 AGENTS.md
