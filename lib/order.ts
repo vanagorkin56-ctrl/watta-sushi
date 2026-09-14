@@ -4,7 +4,7 @@ import type { ShopConfig } from './config';
 export const checkoutSchema = z.object({
  requestId: z.string().uuid(), quoteId: z.string().uuid().optional(), locale: z.enum(['nl','en','uk']),
  items: z.array(z.object({ productId: z.number().int().positive(), quantity: z.number().int().min(1).max(30) }).strict()).min(1).max(products.length),
- customer: z.object({ name: z.string().trim().min(2).max(120), email: z.email().max(254), phone: z.string().trim().regex(/^\+?[\d\s()\-]{7,25}$/),
+ customer: z.object({ name: z.string().trim().min(2).max(120), email: z.email().max(254), phone: z.string().trim().regex(/^\+[1-9]\d{6,14}$/),
   fulfillment: z.enum(['delivery','pickup']), street: z.string().trim().max(200), postcode: z.string().trim().max(10), city: z.string().trim().max(80), comment: z.string().trim().max(1000),
  }).strict(),
 }).strict();

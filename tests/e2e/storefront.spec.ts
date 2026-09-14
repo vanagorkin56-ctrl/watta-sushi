@@ -88,7 +88,7 @@ test('delivery quote, stale-address protection and pickup checkout work',async({
  await expect(pay).toBeDisabled();
  await page.getByLabel('Full name').fill('Test Customer');
  await page.getByLabel('Email address').fill('customer@example.test');
- await page.getByLabel('Phone number').fill('+31600000000');
+ await page.getByRole('textbox',{name:'Phone number'}).fill('06 0000 0000');
  await page.getByLabel('Street and house number').fill('Unknown 1');
  await page.getByLabel('Postcode').fill('1012 LG');
  await page.getByRole('button',{name:'Calculate delivery'}).click();
@@ -109,13 +109,22 @@ test('delivery quote, stale-address protection and pickup checkout work',async({
  await expect(page.getByRole('heading',{name:'Thanks for your order!'})).toBeVisible();
  expect(checkoutPayloads[0].quoteId).toBe('00000000-0000-4000-8000-000000000001');
  expect(checkoutPayloads[0].customer.fulfillment).toBe('delivery');
+ expect(checkoutPayloads[0].customer.phone).toBe('+31600000000');
  await expect(page.locator('.cart-count').first()).toHaveText('0');
 
  await page.evaluate(value=>localStorage.setItem('watta-cart',value),cart);
  await page.goto('/checkout');
+ await page.setViewportSize({width:390,height:844});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
  await page.getByLabel('Full name').fill('Pickup Customer');
  await page.getByLabel('Email address').fill('pickup@example.test');
- await page.getByLabel('Phone number').fill('+31600000001');
+ await page.getByRole('combobox',{name:'Phone number: country code'}).click();
+ await expect(page.getByRole('option')).toHaveCount(28);
+ expect(await page.locator('.phone-country-list').evaluate(element=>element.scrollHeight>element.clientHeight)).toBe(true);
+ const popupBox=await page.locator('.phone-country-popup').boundingBox();
+ expect(popupBox&&popupBox.x>=0&&popupBox.x+popupBox.width<=390).toBeTruthy();
+ await page.getByRole('option',{name:/Ukraine.*\+380/}).click();
+ await page.getByRole('textbox',{name:'Phone number'}).fill('098 534 21 36');
  await page.getByRole('button',{name:'Pickup'}).click();
  await expect(page.getByText('Helicopterstraat 20',{exact:true})).toBeVisible();
  await page.getByRole('checkbox').check();
@@ -123,4 +132,5 @@ test('delivery quote, stale-address protection and pickup checkout work',async({
  await expect(page).toHaveURL(/\/success\?session_id=/);
  expect(checkoutPayloads[1].customer.fulfillment).toBe('pickup');
  expect(checkoutPayloads[1].quoteId).toBeUndefined();
+ expect(checkoutPayloads[1].customer.phone).toBe('+380985342136');
 });
