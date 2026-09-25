@@ -1,9 +1,10 @@
 import {NextResponse} from 'next/server';
 import {createHash} from 'node:crypto';
 import {checkoutSchema,priceOrder,OrderError} from '@/lib/order';
-import {addressHash,addressSchema} from '@/lib/delivery';
+import {addressHash,addressSchema,deliveryQuote} from '@/lib/delivery';
+import {verifyDeliveryQuote} from '@/lib/delivery-token';
 import {shopConfig} from '@/lib/config';
-import {createOrder,db,readDeliveryQuote} from '@/lib/db';
+import {createOrder,db} from '@/lib/db';
 import {stripeClient,appUrl} from '@/lib/stripe';
 import {checkRateLimit,isJsonRequest,readLimitedText,RequestBodyTooLargeError} from '@/lib/security';
 export const runtime='nodejs';
@@ -17,15 +18,18 @@ export async function POST(request:Request){
   const raw=await readLimitedText(request,20000);
   let json;try{json=JSON.parse(raw);}catch{return NextResponse.json({error:'invalidInput'},{status:400});}
   const parsed=checkoutSchema.safeParse(json);if(!parsed.success)return NextResponse.json({error:'invalidInput'},{status:400});
-  const config=shopConfig();if(!config.checkoutReady)return NextResponse.json({error:'unavailable'},{status:503});
+  const config=shopConfig();if(!config.checkoutReady)return NextResponse.json({error:'paymentUnavailable'},{status:503});
   const input=parsed.data;
   let distance:number|undefined;
   if(input.customer.fulfillment==='delivery'){
    const address=addressSchema.safeParse({street:input.customer.street,postcode:input.customer.postcode,city:input.customer.city});
    if(!address.success)throw new OrderError('invalidArea');
-   const quote=input.quoteId?readDeliveryQuote(input.quoteId):undefined;
-   if(!quote||quote.expires_at<Date.now()||quote.address_hash!==addressHash(address.data))throw new OrderError('quoteRequired');
-   distance=quote.distance_meters;
+   if(!input.quoteId)throw new OrderError('quoteRequired');
+   const quote=verifyDeliveryQuote(input.quoteId,addressHash(address.data));
+   const fresh=await deliveryQuote(address.data);
+   const previous=priceOrder(input,config,quote.distance_meters);
+   if(previous.deliveryFee!==fresh.deliveryFee)throw new OrderError('deliveryChanged');
+   distance=fresh.distanceMeters;
   }
   const pricing=priceOrder(input,config,distance);
   const hash=createHash('sha256').update(JSON.stringify({...input,items:pricing.items})).digest('hex');

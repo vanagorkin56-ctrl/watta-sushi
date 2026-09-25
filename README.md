@@ -9,6 +9,7 @@ A production-shaped online sushi shop for Amsterdam. The interface is available 
 - Responsive editorial storefront built around the supplied Watta Sushi identity.
 - 83 catalog items across rolls, sushi, sets, soups, poké bowls, sides, drinks, sauces and desserts.
 - Eight curated set cards and four drink cards with real prices, portions and product imagery.
+- Personal favourites on every product, localStorage persistence and a favourites-only filter with an empty state.
 - Persistent basket, quantities, a minimum of two rolls, pickup and Amsterdam delivery.
 - Custom language menu for Nederlands, English and Українська.
 - Fixed Instagram shortcut, native SVG interface icons and reduced-motion support.
@@ -49,7 +50,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open http://localhost:3000. The menu, basket, pickup form, contacts and language switching work without credentials. Payment is intentionally disabled until Stripe and SMTP are configured. Delivery calculation also needs a Google Maps key; it does not substitute a made-up fee.
+Open http://localhost:3000. The menu, basket, pickup form, contacts and language switching work without credentials. Payment requires Stripe keys and durable order storage. SMTP is optional for payment creation; email jobs wait until a sender is configured. Delivery calculation needs a server-only Mapbox token and a quote signing secret; it does not substitute a made-up fee. See [deployment checklist](docs/launch-configuration.md) for the current Vercel blocker.
 
 ```sh
 npm test
@@ -73,7 +74,7 @@ Driving distance (rather than straight-line distance), cents rounding and free p
 
 `content/source` contains a public API snapshot from the source site, endpoint provenance, 71 original products and an ingredient dictionary. `lib/curated-products.ts` adds the supplied sets and drinks, bringing the displayed catalog to 83 items. Product names and descriptions use source translations. Missing original descriptions are assembled from source ingredient IDs. The source API snapshot has no variant/weight fields; add genuine variants and server validation when supplied.
 
-Images are stored locally in `public/menu`; Next Image provides responsive optimization. Re-run `python3 scripts/import-images.py` to fetch missing images. It does not overwrite existing images. The catalog adapter is `lib/catalog.ts`; base prices are converted to integer eurocents, and archived/inactive products are excluded. Empty source categories are shown as unavailable; the source includes a dessert category.
+Images are stored locally in `public/menu`; Next Image provides responsive optimization. Re-run `python3 scripts/import-images.py` to fetch missing images. It does not overwrite existing images. The catalog adapter is `lib/catalog.ts`; base prices are converted to integer eurocents, and archived/inactive products are excluded. Empty source categories are hidden; the source includes a dessert category.
 
 ## Stripe test setup
 
@@ -104,11 +105,11 @@ Live keys are rejected unless `STRIPE_LIVE_APPROVED=true`. Change this only afte
 
 ## Delivery routing
 
-Enable Google **Geocoding API** and **Routes API** and set `GOOGLE_MAPS_API_KEY` on the server. Restrict the key to these APIs and the deployment's server IPs where possible. The address is geocoded with country NL, then checked for an exact Amsterdam locality, postcode and house number. A driving route is calculated from the pickup address.
+Set server-only `MAPBOX_ACCESS_TOKEN` and `DELIVERY_QUOTE_SECRET` (at least 32 random bytes, for example `openssl rand -hex 32`). The adapter uses Mapbox Geocoding v6 structured address input and Directions `driving`. It geocodes the restaurant and destination, verifies Amsterdam, postcode, street and house number, and charges €0.80 per kilometre. Geocoding responses are not cached or stored.
 
-The server stores a random quote ID, a normalized address hash, route metres and a 15-minute expiry. Checkout validates this stored quote against the entered address, then computes the price again from trusted metres. The fee shown to the customer is preserved through Checkout. Changing the address invalidates the client quote. Unavailable routing never becomes zero-cost delivery.
+The quote is an HMAC-signed token containing an address hash, route metres and a 15-minute expiry; it needs no local database and works across Vercel instances. Checkout verifies the signature, expiry and address, recalculates the route with Mapbox, and rebuilds the fee server-side. If the price changed, payment is refused until the customer recalculates. Changing the address invalidates the client quote. Unavailable routing never becomes zero-cost delivery.
 
-Real Google routing and real Stripe payments have not been exercised without account credentials. Automated tests cover the routing adapter with mock API responses.
+Real Mapbox routing and real Stripe payments have not been exercised without account credentials. Automated tests cover the routing adapter with mock API responses.
 
 ## Email and orders
 
@@ -139,4 +140,4 @@ Before public launch, verify real payment/routing/email integrations and busines
 - `npm run screenshots`: reproducibly captures the page and category gallery under `screenshots/` while the development server is running.
 - `SECURITY.md`: implemented safeguards, the latest audit record and deployment requirements.
 
-Reference documentation: [Stripe fulfillment](https://docs.stripe.com/checkout/fulfillment), [Google Routes](https://developers.google.com/maps/documentation/routes/compute_route_directions). Next.js documentation for the installed version is bundled in `node_modules/next/dist/docs`.
+Reference documentation: [Stripe fulfillment](https://docs.stripe.com/checkout/fulfillment), [Mapbox Geocoding](https://docs.mapbox.com/api/search/geocoding/), [Mapbox Directions](https://docs.mapbox.com/api/navigation/directions/). Next.js documentation for the installed version is bundled in `node_modules/next/dist/docs`.

@@ -92,6 +92,9 @@ button,a {touch-action:manipulation;}
 .icon-button {min-width:40px; min-height:40px;}
 .small-muted,.secure {font-size:.75rem;}
 .field {font-size:.875rem;}
+.favourite-toggle {border:1px solid transparent; min-height:32px; cursor:pointer;}
+.favourite-toggle[aria-pressed=true] {background:var(--green); color:#fff;}
+.favourite-toggle:hover {border-color:var(--green);}
 .field input,.field textarea {font-size:1rem;}
 .phone-control {display:grid; grid-template-columns:auto minmax(0,1fr);}
 .phone-control>input[type=tel] {border-radius:0 9px 9px 0; border-left:0;}
