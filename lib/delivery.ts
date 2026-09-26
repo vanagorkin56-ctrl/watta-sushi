@@ -6,7 +6,7 @@ import {shopConfig} from './config';
 export const addressSchema=z.object({
  street:z.string().trim().min(4).max(200).regex(/\d/),
  postcode:z.string().trim().regex(/^\d{4}\s?[a-zA-Z]{2}$/),
- city:z.string().trim().max(80).refine(v=>v.toLowerCase()==='amsterdam'),
+ city:z.string().trim().min(1).max(80),
 }).strict();
 
 const featureSchema=z.object({
@@ -31,15 +31,14 @@ async function mapboxJson(url:URL){
  }catch{throw new OrderError('deliveryUnavailable');}
 }
 
-async function geocode(street:string,postcode:string|undefined,key:string){
+async function geocode(street:string,postcode:string|undefined,key:string,city='Amsterdam'){
  const url=new URL('https://api.mapbox.com/search/geocode/v6/forward');
- url.search=new URLSearchParams({access_token:key,address_line1:street,place:'Amsterdam',country:'nl',types:'address',autocomplete:'false',limit:'1',language:'nl',...(postcode?{postcode}:{} )}).toString();
+ url.search=new URLSearchParams({access_token:key,address_line1:street,place:city,country:'nl',types:'address',autocomplete:'false',limit:'1',language:'nl',...(postcode?{postcode}:{} )}).toString();
  const data=await mapboxJson(url);
  const parsed=featureSchema.safeParse(data.features?.[0]);
  if(!parsed.success)throw new OrderError('addressNotFound');
  const {properties,geometry}=parsed.data;
  const context=properties.context;
- if(context.country.country_code.toLowerCase()!=='nl'||context.place.name.toLowerCase()!=='amsterdam')throw new OrderError('invalidArea');
  const normalize=(s:string)=>s.replace(/[^\p{L}\p{N}]/gu,'').toLowerCase();
  if(properties.feature_type!=='address'||!context.address||
     normalize(context.address.street_name+context.address.address_number)!==normalize(street)||
@@ -47,6 +46,9 @@ async function geocode(street:string,postcode:string|undefined,key:string){
     ['unmatched','plausible'].includes(properties.match_code?.address_number||'')||
     properties.match_code?.street==='unmatched'||
     properties.match_code?.confidence==='low')throw new OrderError('addressNotFound');
+ // Classify the zone only after confirming that the requested address was found.
+ if(context.country.country_code.toLowerCase()!=='nl'||context.place.name.toLowerCase()!=='amsterdam')throw new OrderError('outsideDeliveryArea');
+ if(normalize(context.place.name)!==normalize(city))throw new OrderError('addressNotFound');
  return geometry.coordinates;
 }
 
@@ -54,7 +56,7 @@ export async function deliveryQuote(address:z.infer<typeof addressSchema>){
  const key=process.env.MAPBOX_ACCESS_TOKEN;
  if(!key)throw new OrderError('deliveryUnavailable');
  // Geocode both ends on the server. Never substitute a guessed origin or straight-line distance.
- const destination=await geocode(address.street,address.postcode,key);
+ const destination=await geocode(address.street,address.postcode,key,address.city);
  let origin:[number,number];
  try{origin=await geocode('Helicopterstraat 20',undefined,key);}catch{throw new OrderError('deliveryUnavailable');}
  const url=new URL(`https://api.mapbox.com/directions/v5/mapbox/driving/${origin.join(',')};${destination.join(',')}`);

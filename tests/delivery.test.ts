@@ -44,8 +44,32 @@ test('unknown, mismatched and out-of-area addresses never produce a cheap quote'
   if(variant==='house')value.properties.context.address.address_number='2';
   if(variant==='place')value.properties.context.place.name='Rotterdam';
   const mock=t.mock.method(globalThis,'fetch',async()=>Response.json({features:variant==='missing'?[]:[value]}));
-  await assert.rejects(()=>deliveryQuote(address),new RegExp(variant==='place'?'invalidArea':'addressNotFound'));
+  await assert.rejects(()=>deliveryQuote(address),new RegExp(variant==='place'?'outsideDeliveryArea':'addressNotFound'));
   assert.equal(mock.mock.callCount(),1);mock.mock.restore();
+ }
+});
+
+test('API distinguishes a recognized Haarlem address from an unknown street in either city',async t=>{
+ resetRateLimitsForTests();
+ for(const city of ['Haarlem','Amsterdam']){
+  for(const found of [true,false]){
+   const value=feature();
+   value.properties.context.place.name=city;
+   value.properties.context.address={street_name:'Grote Markt',address_number:'2'};
+   value.properties.context.postcode.name='2011 RD';
+   const mock=t.mock.method(globalThis,'fetch',async(input:URL)=>{
+    assert.equal(new URL(String(input)).searchParams.get('place'),city);
+    return Response.json({features:found?[value]:[]});
+   });
+   // The recognized out-of-area address must not request a route or sign a quote.
+   if(city==='Haarlem'||!found){
+    const response=await calculate(request('/api/delivery-quote',{street:'Grote Markt 2',postcode:'2011 RD',city}));
+    assert.equal(response.status,400);
+    assert.deepEqual(await response.json(),{error:found?'outsideDeliveryArea':'addressNotFound'});
+    assert.equal(mock.mock.callCount(),1);
+   }
+   mock.mock.restore();
+  }
  }
 });
 
