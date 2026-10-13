@@ -47,7 +47,10 @@ button,a {touch-action:manipulation;}
 .product-body p {font-size:.8125rem; line-height:1.7; color:var(--muted); margin-bottom:20px;}
 .set-product .product-body p {display:block; overflow:visible;}
 .product-bottom>strong {font-size:1.125rem; letter-spacing:-.035em; font-weight:650; font-variant-numeric:tabular-nums;}
-.product-bottom {gap:8px;}
+.product-bottom {gap:8px; flex-wrap:wrap;}
+.product-quantity {flex-shrink:0; margin-left:auto; border-color:var(--green); background:#f5f7f0; overflow:hidden;}
+.product-quantity button {color:var(--green);}
+.product-quantity button:hover:not(:disabled) {background:var(--green); color:white;}
 .badge {font-size:.625rem; padding:6px 9px; gap:5px; font-weight:550;}
 .product-number {font-size:.5625rem;}
 .add-button {min-height:40px; padding:9px 12px; font-size:.6875rem; font-weight:600; gap:5px;}
