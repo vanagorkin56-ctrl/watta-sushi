@@ -54,7 +54,8 @@ test('every product can be added and removed from the cart',async({page})=>{
  await page.goto('/menu');
  const addButtons=page.locator('.product-card .add-button');
  await expect(addButtons).toHaveCount(83);
- for(const button of await addButtons.all()){
+ for(const card of await page.locator('.product-card').all()){
+  const button=card.locator('.add-button');
   await expect(button).toBeEnabled();
   await button.click();
  }
