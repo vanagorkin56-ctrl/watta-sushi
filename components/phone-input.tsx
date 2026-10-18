@@ -3,6 +3,7 @@
 import {Select} from '@base-ui/react/select';
 import {Check,ChevronDown} from 'lucide-react';
 import {useId,useState} from 'react';
+import {copy} from '@/lib/copy';
 import type {Locale} from '@/lib/catalog';
 
 const countries=[
@@ -20,7 +21,9 @@ const countries=[
 type Country=(typeof countries)[number];
 
 export function PhoneInput({locale,label}:{locale:Locale;label:string}){
+ const t=copy(locale);
  const labelId=useId();
+ const [open,setOpen]=useState(false);
  const [iso,setIso]=useState<Country[0]>('NL');
  const [local,setLocal]=useState('');
  const country=countries.find(item=>item[0]===iso)!;
@@ -32,13 +35,13 @@ export function PhoneInput({locale,label}:{locale:Locale;label:string}){
  return <div className="field phone-field">
   <span id={labelId}>{label}</span>
   <div className="phone-control">
-   <Select.Root value={iso} onValueChange={value=>{if(value)setIso(value as Country[0]);}}>
-    <Select.Trigger className="phone-country-trigger" aria-label={`${label}: country code`}>
+   <Select.Root open={open} onOpenChange={setOpen} value={iso} onValueChange={value=>{if(value)setIso(value as Country[0]);}}>
+    <Select.Trigger className="phone-country-trigger" aria-label={`${label}: ${t.countryCode}`}>
      <span aria-hidden="true">{country[1]}</span><Select.Value>{()=>country[2]}</Select.Value>
      <Select.Icon className="language-chevron"><ChevronDown size={14}/></Select.Icon>
     </Select.Trigger>
     <Select.Portal><Select.Positioner className="phone-country-positioner" side="bottom" align="start" sideOffset={8} collisionPadding={12} alignItemWithTrigger={false}>
-     <Select.Popup className="phone-country-popup"><div className="phone-country-heading">EU + Ukraine</div><Select.List className="phone-country-list">
+     <Select.Popup className="phone-country-popup" onKeyDownCapture={event=>{if(event.key==='Escape'){event.preventDefault();event.stopPropagation();setOpen(false);}}}><div className="phone-country-heading">{t.phoneCountries}</div><Select.List className="phone-country-list">
       {countries.map(item=><Select.Item key={item[0]} value={item[0]} className="phone-country-option">
        <span className="country-flag" aria-hidden="true">{item[1]}</span><Select.ItemText>{displayNames.of(item[0])}</Select.ItemText><span className="country-dial">{item[2]}</span><Select.ItemIndicator className="language-check"><Check size={15}/></Select.ItemIndicator>
       </Select.Item>)}
@@ -48,6 +51,6 @@ export function PhoneInput({locale,label}:{locale:Locale;label:string}){
    <input aria-labelledby={labelId} type="tel" inputMode="tel" autoComplete="tel-national" required minLength={6} maxLength={20} pattern="[0-9 ()-]{6,20}" value={local} onChange={event=>setLocal(event.target.value)} placeholder={country[3]}/>
    <input type="hidden" name="phone" value={complete}/>
   </div>
-  <small className="phone-example">{exampleLabel}: {country[2]} {country[3]}</small>
+  <small className="phone-example">{exampleLabel}: {country[3]}</small>
  </div>;
 }

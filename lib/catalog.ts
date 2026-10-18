@@ -1,5 +1,6 @@
 import source from '@/content/source/products.json';
 import ingredients from '@/content/source/ingredients.json';
+import {productNames,productDescriptions} from './catalog-translations';
 import { curatedProducts } from './curated-products';
 export type Locale = 'nl' | 'en' | 'uk';
 export const locales: Locale[] = ['nl', 'en', 'uk'];
@@ -31,5 +32,5 @@ const sourceProducts: Product[] = source.filter(p => !p.isArchived && p.category
     price: Math.round(p.price * 100), image: `/menu/${p.id}.jpg`, categoryId: p.categoryId,
     rollUnits: p.categoryId === 1 ? 1 : 0, popular: p.isPopular, isNew: p.isMenuNew };
 });
-export const products: Product[] = [...sourceProducts, ...curatedProducts];
+export const products: Product[] = [...sourceProducts, ...curatedProducts].map(p=>({...p,name:{...p.name,...productNames[p.id]},description:{...p.description,...productDescriptions[p.id]}}));
 export const money = (cents: number, locale: Locale = 'nl') => new Intl.NumberFormat(locale === 'uk' ? 'uk-UA' : locale === 'nl' ? 'nl-NL' : 'en-IE', { style: 'currency', currency: 'EUR' }).format(cents / 100);

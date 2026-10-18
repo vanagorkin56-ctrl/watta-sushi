@@ -50,6 +50,7 @@ test('menu controls, navigation, search and language switch are functional',asyn
 });
 
 test('every product can be added and removed from the cart',async({page})=>{
+ test.setTimeout(90_000); // 166 real UI actions across the complete catalog.
  await useEnglish(page);
  await page.goto('/menu');
  const addButtons=page.locator('.product-card .add-button');

@@ -42,7 +42,7 @@ export function Checkout(){
     <button type="button" className="button outline" disabled={quoting||!street||!postcode} onClick={calculate}><MapPin size={16}/>{quoting?t.calculating:t.calculate}</button><p className="small-muted">{t.routeTerms}</p>
     {quote&&<p className="notice">{t.distance}: {(quote.distanceMeters/1000).toFixed(2)} km · {money(quote.deliveryFee,locale)}<br/><small>Mapbox</small></p>}
     {addressError&&<p className="notice" role="alert">{message(addressError)}</p>}
-   </>:<p className="notice">{t.pickupFree}<br/><strong>Helicopterstraat 20</strong><br/>Amsterdam, Netherlands<br/>{t.daily} 14:00–21:00</p>}
+   </>:<p className="notice">{t.pickupFree}<br/><strong>Helicopterstraat 20</strong><br/>{t.location}<br/>{t.daily} 14:00–21:00</p>}
    <label className="field" style={{marginTop:24}}>{t.comment}<textarea name="comment" placeholder={t.commentPlaceholder} maxLength={1000}/></label><p className="small-muted">{t.allergyText}</p>
    <label className="form-terms"><input type="checkbox" name="acceptedTerms" required/><span>{t.policy} <Link href="/delivery">{t.delivery}</Link> · <Link href="/privacy">{t.privacy}</Link></span></label>
    {!config.checkoutReady&&<p className="notice">{t.paymentUnavailable} <Link href="/contacts">{t.contactUs}</Link></p>}{error&&<p className="notice" role="alert">{message(error)}</p>}
