@@ -17,6 +17,8 @@ for(const width of [1280,390]){
     await expect(page.locator('html')).toHaveAttribute('lang',locale);
     const expected=path==='/'?t.heroTop:path==='/menu'?t.menuTitle:path==='/delivery'?t.deliveryTitle:path==='/contacts'?t.contactTitle:path==='/privacy'?t.privacyTitle:path==='/checkout'?t.checkoutTitle:path==='/success'?t.waitingTitle:t.pageNotFound;
     await expect(page.locator('main')).toContainText(expected);
+    const titles:Record<string,string>={'/':t.city,'/menu':t.menu,'/delivery':t.delivery,'/contacts':t.contacts,'/privacy':t.privacy,'/checkout':t.checkout,'/success':t.summary};
+    await expect(page).toHaveTitle(`${titles[path]||t.pageNotFound} | Watta Sushi`);
     await expect(page.locator('footer')).toContainText(t.location);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),path+' '+locale).toBe(true);
     if(path==='/menu'){
